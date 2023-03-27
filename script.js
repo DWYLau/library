@@ -67,7 +67,12 @@ function checkReadStatus() {
 
 function createCard() {
   const cardContainer = document.querySelector(".card-container");
-  const card = document.createElement("div");
-  cardContainer.appendChild(card);
-  card.classList.add("card");
+  const cardsSquares = cardContainer.querySelectorAll("div");
+  cardsSquares.forEach((square) => square.remove());
+
+  myLibrary.forEach((item) => {
+    const card = document.createElement("div");
+    cardContainer.appendChild(card);
+    card.classList.add("card");
+  });
 }
