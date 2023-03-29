@@ -139,12 +139,34 @@ button:hover {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   height: 350px;
   width: 500px;
   margin-top: 30px;
   margin-left: 60px;
   border: 2px solid black;
-  box-shadow: 1px 3px 3px black;
-  border-radius: 30px;
-  background: linear-gradient(to right, #ffefba, #ffffff);
+  box-shadow: 2px 3px 3px black;
+  border-radius: 10px;
+  background-color: rgb(246, 244, 244);
+}
+
+.card h1 {
+  font-family: Roboto;
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: 200;
+  margin: 15px 0 0 0;
+  padding: 5px;
+}
+
+.card button {
+  font-size: 1.3em;
+  height: 50px;
+  width: 100px;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 10px;
 }

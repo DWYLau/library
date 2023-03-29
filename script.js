@@ -46,7 +46,7 @@ function addBook() {
   let bookTitle = title.value;
   let bookAuthor = author.value;
   let numberOfPages = pages.value;
-  read = checkReadStatus();
+  let read = checkReadStatus();
   let book = new Book(bookTitle, bookAuthor, numberOfPages, read);
   closeForm();
   myLibrary.push(book);
@@ -74,5 +74,47 @@ function createCard() {
     const card = document.createElement("div");
     cardContainer.appendChild(card);
     card.classList.add("card");
+
+    const title = document.createElement("h1");
+    const author = document.createElement("h1");
+    const pages = document.createElement("h1");
+    const readButton = document.createElement("button");
+    const deleteButton = document.createElement("button");
+
+    card.appendChild(title);
+    card.appendChild(author);
+    card.appendChild(pages);
+    card.appendChild(readButton);
+    if (item.read === true) {
+      readButton.style.background = "lightgreen";
+    } else {
+      readButton.style.background = "#ffcccb";
+    }
+    card.appendChild(deleteButton);
+
+    title.textContent = `Title: ${item.title}`;
+    author.textContent = `Author: ${item.author}`;
+    pages.textContent = `Pages: ${item.pages}`;
+    readButton.textContent = changeReadContent(item);
+    readButton.addEventListener("click", changeReadStatus);
+    deleteButton.textContent = "Delete";
   });
+}
+
+function changeReadContent(book) {
+  if (book.read === true) {
+    return "Read";
+  } else {
+    return "Unread";
+  }
+}
+
+function changeReadStatus() {
+  if (this.textContent === "Read") {
+    this.textContent = "Unread";
+    this.style.background = "#ffcccb";
+  } else if (this.textContent === "Unread") {
+    this.textContent = "Read";
+    this.style.background = "lightgreen";
+  }
 }
