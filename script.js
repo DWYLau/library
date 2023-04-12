@@ -98,6 +98,10 @@ function createCard() {
     readButton.textContent = changeReadContent(item);
     readButton.addEventListener("click", changeReadStatus);
     deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", function () {
+      deleteBook(item.title);
+      card.remove();
+    });
   });
 }
 
@@ -117,4 +121,9 @@ function changeReadStatus() {
     this.textContent = "Read";
     this.style.background = "lightgreen";
   }
+}
+
+function deleteBook(bookTitle) {
+  let index = myLibrary.findIndex((x) => x.title === bookTitle);
+  myLibrary.splice(index, 1);
 }
