@@ -33,19 +33,33 @@ submitButton.addEventListener("click", function (event) {
 
 // book constructor
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 // functions for adding book
 
 function addBook() {
   let bookTitle = title.value;
+  if (bookTitle == "") {
+    alert("Please enter a title!");
+    return false;
+  }
   let bookAuthor = author.value;
+  if (bookAuthor == "") {
+    alert("Please enter an author!");
+    return false;
+  }
   let numberOfPages = pages.value;
+  if (isNaN(numberOfPages) == true) {
+    alert("Please enter a number!");
+    return false;
+  }
   let read = checkReadStatus();
   let book = new Book(bookTitle, bookAuthor, numberOfPages, read);
   closeForm();
@@ -126,4 +140,11 @@ function changeReadStatus() {
 function deleteBook(bookTitle) {
   let index = myLibrary.findIndex((x) => x.title === bookTitle);
   myLibrary.splice(index, 1);
+}
+
+function validateForm(form) {
+  if (form.textContent == "") {
+    alert("Name must be filled out!");
+    return false;
+  }
 }
