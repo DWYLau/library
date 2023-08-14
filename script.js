@@ -4,6 +4,7 @@ let myLibrary = [];
 
 // DOM manipulation for form elements
 
+const form = document.getElementById("form");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
@@ -23,14 +24,6 @@ function closeForm() {
   checkbox.checked = false;
 }
 
-// querySelector/function for submit button
-
-const submitButton = document.querySelector(".submit-button");
-submitButton.addEventListener("click", function (event) {
-  event.preventDefault();
-  addBook();
-});
-
 // book constructor
 
 class Book {
@@ -46,20 +39,8 @@ class Book {
 
 function addBook() {
   let bookTitle = title.value;
-  if (bookTitle == "") {
-    alert("Please enter a title!");
-    return false;
-  }
   let bookAuthor = author.value;
-  if (bookAuthor == "") {
-    alert("Please enter an author!");
-    return false;
-  }
   let numberOfPages = pages.value;
-  if (isNaN(numberOfPages) == true) {
-    alert("Please enter a number!");
-    return false;
-  }
   let read = checkReadStatus();
   let book = new Book(bookTitle, bookAuthor, numberOfPages, read);
   closeForm();
@@ -142,9 +123,52 @@ function deleteBook(bookTitle) {
   myLibrary.splice(index, 1);
 }
 
-function validateForm(form) {
-  if (form.textContent == "") {
-    alert("Name must be filled out!");
-    return false;
+// validate form
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  validateInputs();
+  if (document.querySelectorAll(".valid").length === 3) {
+    addBook();
   }
+});
+
+function validateInputs() {
+  const bookValue = title.value.trim();
+  const authorValue = author.value.trim();
+  const pagesValue = pages.value.trim();
+
+  if (bookValue === "") {
+    setError(title, "Title is required");
+  } else {
+    setValid(title);
+  }
+  if (authorValue === "") {
+    setError(author, "Author is required");
+  } else {
+    setValid(author);
+  }
+  if (isNaN(pagesValue) || pagesValue === "") {
+    setError(pages, "Pages is required and only numbers will be accepted");
+  } else {
+    setValid(pages);
+  }
+}
+
+function setError(element, message) {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  errorDisplay.innerText = message;
+  inputControl.classList.add("error");
+  inputControl.classList.remove("valid");
+}
+
+function setValid(element) {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  errorDisplay.innerText = "";
+  inputControl.classList.add("valid");
+  inputControl.classList.remove("error");
 }

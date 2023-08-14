@@ -15,29 +15,29 @@
     </header>
 
     <div class="form-popup">
-      <form action="#" class="form-container">
+      <form action="#" class="form-container" id="form">
         <h1>Add a new book</h1>
-        <input
-          type="text"
-          id="title"
-          placeholder="Title"
-          name="title"
-          required
-        />
-        <input
-          type="text"
-          id="author"
-          placeholder="Author"
-          name="author"
-          required
-        />
-        <input
-          type="text"
-          id="pages"
-          placeholder="Number of pages"
-          name="pages"
-          required
-        />
+
+        <div class="input-container">
+          <input type="text" id="title" placeholder="Title" name="title" />
+          <div class="error"></div>
+        </div>
+
+        <div class="input-container">
+          <input type="text" id="author" placeholder="Author" name="author" />
+          <div class="error"></div>
+        </div>
+
+        <div class="input-container">
+          <input
+            type="text"
+            id="pages"
+            placeholder="Number of pages"
+            name="pages"
+          />
+          <div class="error"></div>
+        </div>
+
         <div class="checkbox">
           <label for="read">Have you read it?</label>
           <input type="checkbox" id="read" name="read" value="read" />
